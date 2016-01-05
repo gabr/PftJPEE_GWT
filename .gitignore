@@ -1,3 +1,6 @@
 *.zip
 .*.swp
 gwt-2.4.0
+/Lab5-GWT-Netbeans/Lab5-GWT/build/
+/Lab5-GWT-Netbeans/Lab5-GWT/dist/
+/Lab5-GWT-Netbeans/Lab5-GWT/nbproject/private/
