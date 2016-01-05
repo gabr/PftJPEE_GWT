@@ -1,0 +1,8 @@
+1.   The project requires installation of the following elements:
+  a)  GWT4NB plugin
+  b)  GWT SDK version 2.4.0
+
+  The SDK is specified while creating the project and picking the Google Web Toolkit framework.
+
+2.  Note that the module was renamed to 'main' so after adding GWT RPC Service make sure that in web.xml the servlet
+  is mapped under the url address starting with /main/.
