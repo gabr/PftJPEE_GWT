@@ -8,6 +8,7 @@ import pl.gabrys.arkadiusz.client.authorization.LoginUsage;
  * Main entry point.
  *
  * @author arkad_000
+ * @version 1.0
  */
 public class MainEntryPoint implements EntryPoint {
 

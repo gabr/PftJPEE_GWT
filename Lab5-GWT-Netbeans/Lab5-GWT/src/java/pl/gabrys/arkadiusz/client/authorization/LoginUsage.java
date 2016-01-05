@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pl.gabrys.arkadiusz.client.authorization;
 
 import com.google.gwt.core.client.GWT;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -21,21 +14,56 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import pl.gabrys.arkadiusz.shared.User;
 
 /**
- * Example class using the Login service.
- *
+ * Ussage of the Login service
  * @author arkad_000
+ * @version 1.0
  */
 public class LoginUsage extends VerticalPanel {
 
+    /**
+     * Label for user name
+     */
     private Label lblLogin = new Label("Name: ");
-    private Label lblPass = new Label("Password: ");
-    private Label lblServerReply = new Label();
-    private Label lblLoginValidation = new Label();
-    private Label lblPasswordValidation = new Label();
-    private TextBox txtLogin = new TextBox();
-    private TextBox txtPass = new TextBox();
-    private Button btnSend = new Button("Login");
     
+    /**
+     * Label for user password
+     */
+    private Label lblPass = new Label("Password: ");
+    
+    /**
+     * Label for server reply
+     */
+    private Label lblServerReply = new Label();
+    
+    /**
+     * Label for login validatino messages
+     */
+    private Label lblLoginValidation = new Label();
+    
+    /**
+     * Label for password validation messages
+     */
+    private Label lblPasswordValidation = new Label();
+    
+    /**
+     * Text box for user name
+     */
+    private TextBox txtLogin = new TextBox();
+    
+    /**
+     * Text box for user password
+     */
+    private TextBox txtPass = new TextBox();
+    
+    /**
+     * Submit button
+     */
+    private Button btnSend = new Button("Register");
+    
+    /**
+     * Class default constructor.
+     * Creates interactive register form.
+     */
     public LoginUsage() {
         add(lblServerReply);
         add(lblLogin);
@@ -54,9 +82,17 @@ public class LoginUsage extends VerticalPanel {
         lblPasswordValidation.getElement().getStyle().setColor("red");
 
         final AsyncCallback<String> callback = new AsyncCallback<String>() {
+            @Override
             public void onSuccess(String result) {
+                
+                if (!result.equals("")) {
+                    lblServerReply.setVisible(true);
+                    lblServerReply.setText(result);
+                    return;
+                }
+                
                 lblServerReply.setVisible(true);
-                lblServerReply.setText("Logged in: " + result);
+                lblServerReply.setText("Registered in");
                 lblServerReply.getElement().getStyle().setColor("green");
                 
                 lblLogin.setVisible(false);
@@ -68,6 +104,7 @@ public class LoginUsage extends VerticalPanel {
                 btnSend.setVisible(false);
             }
             
+            @Override
             public void onFailure(Throwable caught) {
                 lblServerReply.setVisible(true);
                 lblServerReply.setText(caught.getMessage());
@@ -102,6 +139,10 @@ public class LoginUsage extends VerticalPanel {
         });
     }
     
+    /**
+     * Gets service object
+     * @return Login service object
+     */
     public static LoginAsync getService() {
         return GWT.create(Login.class);
     }
