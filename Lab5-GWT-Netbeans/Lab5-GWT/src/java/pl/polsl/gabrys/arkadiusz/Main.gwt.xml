@@ -6,7 +6,7 @@
 <module rename-to="main">
     <inherits name="com.google.gwt.user.User"/>
 
-    <entry-point class="pl.polsl.lastname.firstname.client.MainEntryPoint"/>
+    <entry-point class="pl.polsl.gabrys.arkadiusz.client.MainEntryPoint"/>
 
     <!-- Defines client and shared subpackages as packages compilable to JavaScript -->
     <source path="client"/>
