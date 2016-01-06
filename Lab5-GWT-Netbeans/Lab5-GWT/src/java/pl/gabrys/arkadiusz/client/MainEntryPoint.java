@@ -3,6 +3,7 @@ package pl.gabrys.arkadiusz.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 import pl.gabrys.arkadiusz.client.authorization.LoginUsage;
+import pl.gabrys.arkadiusz.client.navigation.MenuUsage;
 
 /**
  * Main entry point.
@@ -22,7 +23,9 @@ public class MainEntryPoint implements EntryPoint {
      * The entry point method, called automatically by loading a module that
      * declares an implementing class as an entry-point
      */
+    @Override
     public void onModuleLoad() {
         RootPanel.get().add(new LoginUsage());
+        RootPanel.get().add(new MenuUsage());
     }
 }

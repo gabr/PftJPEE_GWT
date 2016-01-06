@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import pl.gabrys.arkadiusz.shared.ResultDialogBox;
 import pl.gabrys.arkadiusz.shared.User;
 
 /**
@@ -29,11 +30,6 @@ public class LoginUsage extends VerticalPanel {
      * Label for user password
      */
     private Label lblPass = new Label("Password: ");
-    
-    /**
-     * Label for server reply
-     */
-    private Label lblServerReply = new Label();
     
     /**
      * Label for login validatino messages
@@ -58,14 +54,13 @@ public class LoginUsage extends VerticalPanel {
     /**
      * Submit button
      */
-    private Button btnSend = new Button("Register");
+    private Button btnSend = new Button("Register new user");
     
     /**
      * Class default constructor.
      * Creates interactive register form.
      */
     public LoginUsage() {
-        add(lblServerReply);
         add(lblLogin);
         add(lblLoginValidation);
         add(txtLogin);
@@ -74,8 +69,6 @@ public class LoginUsage extends VerticalPanel {
         add(txtPass);
         add(btnSend);
         
-        lblServerReply.setVisible(false);
-        lblServerReply.getElement().getStyle().setColor("red");
         lblLoginValidation.setVisible(false);
         lblLoginValidation.getElement().getStyle().setColor("red");
         lblPasswordValidation.setVisible(false);
@@ -86,34 +79,24 @@ public class LoginUsage extends VerticalPanel {
             public void onSuccess(String result) {
                 
                 if (!result.equals("")) {
-                    lblServerReply.setVisible(true);
-                    lblServerReply.setText(result);
+                    ResultDialogBox dialog = new ResultDialogBox(result);
+                    dialog.show();
                     return;
                 }
                 
-                lblServerReply.setVisible(true);
-                lblServerReply.setText("Registered in");
-                lblServerReply.getElement().getStyle().setColor("green");
-                
-                lblLogin.setVisible(false);
-                lblLoginValidation.setVisible(false);
-                txtLogin.setVisible(false);
-                lblPass.setVisible(false);
-                lblPasswordValidation.setVisible(false);
-                txtPass.setVisible(false);
-                btnSend.setVisible(false);
+                ResultDialogBox dialog = new ResultDialogBox("Registered in");
+                dialog.show();
             }
             
             @Override
             public void onFailure(Throwable caught) {
-                lblServerReply.setVisible(true);
-                lblServerReply.setText(caught.getMessage());
+                ResultDialogBox dialog = new ResultDialogBox(caught.getMessage());
+                dialog.show();
             }
         };
 
         btnSend.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                lblServerReply.setVisible(false);
                 lblLoginValidation.setVisible(false);
                 lblPasswordValidation.setVisible(false);
         

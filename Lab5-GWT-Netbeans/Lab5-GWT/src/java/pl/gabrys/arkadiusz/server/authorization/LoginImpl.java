@@ -1,10 +1,10 @@
 package pl.gabrys.arkadiusz.server.authorization;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import java.util.ArrayList;
 
 import pl.gabrys.arkadiusz.client.authorization.Login;
 import pl.gabrys.arkadiusz.shared.User;
+import pl.gabrys.arkadiusz.shared.UsersDatabase;
 
 /**
  * Servlet class handling Login action
@@ -12,11 +12,6 @@ import pl.gabrys.arkadiusz.shared.User;
  * @version 1.0
  */
 public class LoginImpl extends RemoteServiceServlet implements Login {
-    
-    /**
-     * Users array
-     */
-    private static ArrayList<User> users = new ArrayList<User>();
 
     /**
      * Adds new user if not already exist
@@ -25,13 +20,13 @@ public class LoginImpl extends RemoteServiceServlet implements Login {
      */
     @Override
     public String login(User user) {
-        for (User u : users) {
+        for (User u : UsersDatabase.getUsers()) {
             if (u.getName().equals(user.getName())) {
                 return "User already exist";
             }
         }
         
-        users.add(user);
+        UsersDatabase.addUser(user);
         return "";
     }
 }
